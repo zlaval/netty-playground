@@ -1,0 +1,23 @@
+management:
+  server:
+    port: 9000
+  endpoints.web.exposure.include: env,health,info,metrics,loggers,prometheus
+  endpoint.health.show-details: ALWAYS
+
+server:
+  port: 8000
+
+logging:
+  level:
+    com.zlrx: debug
+    com: info
+
+spring:
+  application:
+    name: netty-research
+  sleuth:
+    enabled: true
+    reactor:
+      instrumentation-type: decorate_on_each
+    propagation:
+      type: b3

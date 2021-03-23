@@ -1,0 +1,19 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPathPattern": "/people"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "people_response.json",
+    "delayDistribution": {
+      "type": "lognormal",
+      "median": 400,
+      "sigma": 0.9
+    }
+  }
+}
+

@@ -1,0 +1,19 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPathPattern": "/address"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "address_response.json",
+    "delayDistribution": {
+      "type": "lognormal",
+      "median": 400,
+      "sigma": 0.4
+    }
+  }
+}
+
