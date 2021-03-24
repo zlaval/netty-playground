@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  http-mock:
+    image: holomekc/wiremock-gui
+    hostname: http-mock
+    volumes:
+      - ./../src/main/resources/wiremock/:/home/wiremock/storage
+    ports:
+      - 8001:8080
+    environment:
+      WIREMOCK_OPTIONS: "--global-response-templating,--root-dir=/home/wiremock/storage"

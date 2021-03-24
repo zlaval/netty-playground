@@ -1,15 +1,19 @@
 package com.zlrx.netty.nettyresearch
 
-import com.zlrx.netty.nettyresearch.config.startServer
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import reactor.tools.agent.ReactorDebugAgent
 
+
 @SpringBootApplication
-class NettyResearchApplication
+//@EnableZipkinServer
+class NettyResearchApplication {
+
+
+}
 
 fun main(args: Array<String>) {
     ReactorDebugAgent.init()
-    startServer()
+    // startServer()
     runApplication<NettyResearchApplication>(*args)
 }

@@ -1,7 +1,12 @@
 {
   "request": {
     "method": "GET",
-    "urlPathPattern": "/people"
+    "urlPathPattern": "/people",
+    "headers": {
+      "x-correlation-id": {
+        "matches": ".+"
+      }
+    }
   },
   "response": {
     "status": 200,

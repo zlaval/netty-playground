@@ -10,7 +10,9 @@ server:
 logging:
   level:
     com.zlrx: debug
-    com: info
+    org: info
+    reactor.netty: debug
+    reactor.icp: debug
 
 spring:
   application:
@@ -21,3 +23,20 @@ spring:
       instrumentation-type: decorate_on_each
     propagation:
       type: b3
+    baggage:
+      correlation-enabled: true
+      tag-fields:
+        - request-id
+      remote-fields:
+        - x-correlation-id
+        - x-context-id
+        - x-channel-id
+        - x-request-tracking-id
+      local-fields:
+        - correlation-id
+        - request-id
+      correlation-fields:
+        - x-correlation-id
+    web:
+      client:
+        enabled: true

@@ -20,12 +20,24 @@ extra["springCloudVersion"] = "2020.0.1"
 configurations.forEach {
     it.exclude(module = "spring-boot-starter-tomcat")
     it.exclude(module = "mockito-core")
+    //it.exclude(module = "spring-boot-starter-logging")
 }
+
+//configurations.all {
+//    resolutionStrategy.dependencySubstitution.all { dependency ->
+//        if (dependency.requested instanceof ModuleComponentSelector && dependency.requested.module == 'spring-boot-starter-logging') {
+//            dependency.useTarget("org.springframework.boot:spring-boot-starter-log4j2:$dependency.requested.version", 'Use Log4j2 instead of Logback')
+//        }
+//    }
+//}
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-reactor-netty")
     implementation("org.springframework.cloud:spring-cloud-starter-sleuth")
+    //implementation("org.springframework.cloud:spring-cloud-sleuth-zipkin")
+    //implementation ("org.springframework.boot:spring-boot-starter-log4j2")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("io.projectreactor.addons:reactor-extra")
@@ -34,10 +46,14 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j")
-    implementation("com.github.tomakehurst:wiremock:2.27.2")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.2")
-    runtimeOnly("io.micrometer:micrometer-registry-prometheus")
 
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.2")
+    // implementation("io.zipkin.java:zipkin-autoconfigure-ui:2.12.9")
+    //implementation("io.zipkin.java:zipkin-server:2.12.9")
+
+
+    runtimeOnly("io.micrometer:micrometer-registry-prometheus")
+    //testImplementation("com.github.tomakehurst:wiremock:2.27.2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("io.mockk:mockk:1.10.2")
