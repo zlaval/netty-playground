@@ -3,6 +3,18 @@ management:
     port: 9000
   endpoints.web.exposure.include: env,health,info,metrics,loggers,prometheus
   endpoint.health.show-details: ALWAYS
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    web:
+      server:
+        request:
+          autotime:
+            enabled: true
+      client:
+        request:
+          autotime:
+            enabled: true
 
 server:
   port: 8000
@@ -11,8 +23,9 @@ logging:
   level:
     com.zlrx: debug
     org: info
-    reactor.netty: debug
-    reactor.icp: debug
+    reactor.netty: info
+    reactor.icp: info
+    org.springframework.web.servlet.DispatcherServlet: off
 
 spring:
   application:
@@ -20,7 +33,7 @@ spring:
   sleuth:
     enabled: true
     reactor:
-      instrumentation-type: decorate_on_each
+      instrumentation-type: decorate_queues
     propagation:
       type: b3
     baggage:

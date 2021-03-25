@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
-import java.time.Duration
 
 @Controller
 class EmployeeController constructor(
@@ -17,6 +16,11 @@ class EmployeeController constructor(
 
     @GetMapping(path = ["/employees"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getPeople(): Mono<ResponseEntity<Flux<Employee>>> = Mono.just(ResponseEntity.ok(service.collectEmployees()))
+
+
+    @GetMapping(path = ["/names"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun getNames(): Mono<ResponseEntity<Flux<String>>> =
+        Mono.just(ResponseEntity.ok(Flux.just("Zalan", "Laura", "Erik", "Alex")))
 
 
 }

@@ -9,3 +9,8 @@ services:
       - 8001:8080
     environment:
       WIREMOCK_OPTIONS: "--global-response-templating,--root-dir=/home/wiremock/storage"
+  zipkin:
+    image: openzipkin/zipkin
+    hostname: zipkin
+    ports:
+      - 9411:9411
