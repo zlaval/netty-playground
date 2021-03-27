@@ -39,7 +39,7 @@ class WebClientConfig {
             .build()
 
         val tcpClient = TcpClient.create(provider)
-            .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 2_000)
+            .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 2000)
             .doOnConnected {
                 logger.info("Connected tcp")
                 it.addHandler(ReadTimeoutHandler(2))

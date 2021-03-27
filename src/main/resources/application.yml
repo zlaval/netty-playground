@@ -3,9 +3,17 @@ management:
     port: 9000
   endpoints.web.exposure.include: env,health,info,metrics,loggers,prometheus
   endpoint.health.show-details: ALWAYS
+  health:
+    circuitbreakers:
+      enabled: true
   metrics:
     tags:
       application: ${spring.application.name}
+    distribution:
+      percentiles-histogram:
+        resilience4j:
+          circuitbreaker:
+            calls: true
     web:
       server:
         request:
@@ -26,6 +34,28 @@ logging:
     reactor.netty: info
     reactor.icp: info
     org.springframework.web.servlet.DispatcherServlet: off
+
+resilience4j.circuitbreaker:
+  circuit-breaker-aspect-order: 1
+  configs:
+    default:
+      failureRateThreshold: 50
+      slowCallRateThreshold: 75
+      slowCallDurationThreshold: 800
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowSize: 20
+      minimumNumberOfCalls: 5
+      waitDurationInOpenState: 30s
+      eventConsumerBufferSize: 30
+      registerHealthIndicator: false
+  instances:
+    peopleService:
+      baseConfig: default
+    addressService:
+      baseConfig: default
+  metrics:
+    enabled: true
+
 
 spring:
   application:
@@ -53,3 +83,6 @@ spring:
     web:
       client:
         enabled: true
+    mongodb:
+      enabled: false
+

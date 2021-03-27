@@ -41,6 +41,7 @@ dependencies {
 
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.2")
     implementation("io.github.mweirauch:micrometer-jvm-extras:0.2.2")
+    implementation("io.github.resilience4j:resilience4j-micrometer:1.7.0")
 
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
     //testImplementation("com.github.tomakehurst:wiremock:2.27.2")
