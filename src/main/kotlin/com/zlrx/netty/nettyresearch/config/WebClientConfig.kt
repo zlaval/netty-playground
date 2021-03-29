@@ -12,6 +12,8 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector
 import org.springframework.http.codec.ClientCodecConfigurer
 import org.springframework.http.codec.json.Jackson2JsonDecoder
 import org.springframework.http.codec.json.Jackson2JsonEncoder
+import org.springframework.web.reactive.function.client.ClientRequest
+import org.springframework.web.reactive.function.client.ExchangeFunction
 import org.springframework.web.reactive.function.client.ExchangeStrategies
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.netty.http.client.HttpClient
@@ -49,8 +51,14 @@ class WebClientConfig {
         return builder
             .clientConnector(ReactorClientHttpConnector(HttpClient.from(tcpClient).wiretap(true)))
             .exchangeStrategies(strategies)
+            .filter { request, next -> signalLogFilter(request, next) }
             .baseUrl("http://localhost:8001")
             .build()
     }
+
+    private fun signalLogFilter(request: ClientRequest, next: ExchangeFunction) =
+        next.exchange(request).doOnEach {
+            logger.info("WebClient doOnEach. Signal: ${it.type.name}")
+        }
 
 }

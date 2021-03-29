@@ -20,8 +20,8 @@ fun main(args: Array<String>) {
         .initializers(ContextInitializer())
         .run(*args)
 
-    applicationContext.beanDefinitionNames.forEach {
-        logger.info(it)
-    }
+//    applicationContext.beanDefinitionNames.forEach {
+//        logger.info(it)
+//    }
     //runApplication<NettyResearchApplication>(*args)
 }

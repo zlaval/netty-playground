@@ -20,6 +20,15 @@ class AddressExternalService(private val webClient: WebClient) {
             .accept(MediaType.APPLICATION_JSON)
             .retrieve()
             .bodyToMono(Address::class.java)
+            .doOnCancel {
+                logger.info("Address cancelled")
+            }
+            .doOnError {
+                logger.info("Address error: ${it.localizedMessage}" + it.localizedMessage)
+            }
+            .doOnEach {
+                logger.info("Address doOnEach: ${it.type.name}")
+            }
     }
 
     fun addressFallback(exception: Exception): Mono<Address> {
