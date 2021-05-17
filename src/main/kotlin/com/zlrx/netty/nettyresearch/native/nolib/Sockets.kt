@@ -7,16 +7,10 @@ import java.nio.channels.Selector
 import java.nio.channels.ServerSocketChannel
 import java.nio.channels.SocketChannel
 
-const val PORT = 12345
-
 fun main() {
 
     Thread {
         Server().run()
-    }.start()
-
-    Thread {
-        Client().run()
     }.start()
 
     Thread {
@@ -76,10 +70,12 @@ class Client {
         val client = SocketChannel.open(address)
 
         val buffer = ByteBuffer.allocate(15)
-        client.read(buffer)
-        for (i in 0 until 15) {
-            println(buffer[i].toChar())
+        val read = client.read(buffer)
+        for (i in 0 until read) {
+            print(buffer[i].toChar())
         }
+        println()
+        client.finishConnect()
     }
 
 }
